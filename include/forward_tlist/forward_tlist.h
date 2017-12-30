@@ -16,7 +16,7 @@ namespace tlib{
 
         iterator begin() { return mylist_iterator<T>(head); }
         iterator end() { return mylist_iterator<T>(NULL); }
-        
+
     private:
         forward_tlist_node *head;
         forward_tlist_node *tail;
