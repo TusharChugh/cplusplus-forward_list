@@ -2,13 +2,13 @@
 #define FORWARD_LIST_FORWARD_TLIST_NODE_H
 
 namespace tlib {
-    //forward declare forward_list and iterator
+    //forward declare forward_tlist and iterator
     template<typename T> class forward_tlist;
     template<typename T> class forward_tlist_iterator;
 
     template<typename T>
     class forward_tlist_node {
-        //Giving access to private members to forward_list<T> and forward_tlist_iterator<T>
+        //Giving access to private members to forward_tlist<T> and forward_tlist_iterator<T>
         friend class forward_tlist<T>;
         friend class forward_tlist_iterator<T>;
 
