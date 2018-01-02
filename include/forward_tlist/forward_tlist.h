@@ -3,11 +3,14 @@
 
 #include "forward_tlist_node.h"
 #include <cstddef>
+#include <memory>
 
 namespace tlib{
-    template <typename T>
+    template <typename T, typename allocator>
     class forward_tlist{
+        using allocator_type = allocator;
         using iterator = tlib::forward_tlist_iterator<T>;
+        using value_type = typename allocator::value_type;
     public:
         forward_tlist(): head(nullptr), tail(nullptr), size_(0) {};
         ~forward_tlist() { delete head; }
@@ -26,7 +29,7 @@ namespace tlib{
         std::size_t size_;
         forward_tlist_node<T> *head;
         forward_tlist_node<T> *tail;
-    };
-}
+    }; //class forward_tlist
+} //namespace tlib
 
 #endif //FORWARD_LIST_FORWARD_TLIST_H
