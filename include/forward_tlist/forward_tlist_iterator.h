@@ -16,7 +16,7 @@ namespace tlib {
 
     private:
         forward_tlist_node<T> *pointee;
-        forward_tlist_iterator(forward_tlist_node<T> *pointee): pointee(pointee) {}
+        explicit forward_tlist_iterator(forward_tlist_node<T> *pointee): pointee(pointee) {}
 
     }; //class forward_tlist_iterator
 } //namespace tlib
