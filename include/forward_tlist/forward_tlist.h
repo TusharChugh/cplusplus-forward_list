@@ -11,10 +11,7 @@ namespace tlib{
         forward_tlist(): head(nullptr), tail(nullptr) {};
         ~forward_tlist() { delete head; }
         bool empty() { return head == nullptr; }
-        void push_back(const T& element) {
-
-        }
-
+        void push_back(const T& element);
         iterator begin() { return forward_tlist_iterator<T>(head); }
         iterator end() { return forward_tlist_iterator<T>(nullptr); }
 
