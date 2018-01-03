@@ -5,7 +5,7 @@
 
 namespace tlib {
     //forward declare forward_tlist and iterator
-    template<typename T, typename allocator = std::allocator<T>> class forward_tlist;
+    template<typename T, typename Alloc = std::allocator<T>> class forward_tlist;
     template<typename T> class forward_tlist_iterator;
 
     template<typename T>
