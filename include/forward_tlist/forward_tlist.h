@@ -14,11 +14,13 @@ namespace tlib{
         using reference = typename allocator::reference;
         using const_reference = typename allocator::const_reference;
         using size_type = typename allocator::size_type;
+        using forward_tlist_node = tlib::forward_tlist_node<T>;
 
     public:
-        forward_tlist(): head(nullptr), tail(nullptr), size_(0) {};
-        ~forward_tlist() { delete head; }
-        bool empty() { return head == nullptr; }
+        explicit forward_tlist(const allocator_type & alloc = allocator_type ()):
+                __allocator(alloc), __head(nullptr), __tail(nullptr), __size(0) {};
+        ~forward_tlist() { delete __head; }
+        bool empty() { return __head == nullptr; }
         size_type size() const;
         /**
          * Prepends the given element to the beginning of the container
@@ -26,13 +28,14 @@ namespace tlib{
          * @param element the value of the element to prepend
          */
         void push_front(const T& element);
-        iterator begin() { return forward_tlist_iterator<T>(head); }
+        iterator begin() { return forward_tlist_iterator<T>(__head); }
         iterator end() { return forward_tlist_iterator<T>(nullptr); }
 
     private:
-        size_type size_;
-        forward_tlist_node<T> *head;
-        forward_tlist_node<T> *tail;
+        size_type __size;
+        allocator_type __allocator;
+        forward_tlist_node *__head;
+        forward_tlist_node *__tail;
     }; //class forward_tlist
 } //namespace tlib
 

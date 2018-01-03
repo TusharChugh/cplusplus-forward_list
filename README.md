@@ -8,3 +8,5 @@ Todo's:
 2. add const iterator
 3. add find 
 4. add sort
+5. add function  make iterator
+6. add function to create a node using the allocator

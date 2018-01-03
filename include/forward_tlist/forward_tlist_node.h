@@ -8,13 +8,12 @@ namespace tlib {
     template<typename T, typename allocator = std::allocator<T>> class forward_tlist;
     template<typename T> class forward_tlist_iterator;
 
-    template<typename T, typename allocator = std::allocator<T>>
+    template<typename T>
     class forward_tlist_node {
         //Giving access to private members to forward_tlist<T> and forward_tlist_iterator<T>
         friend class forward_tlist<T, std::allocator<T>>;
         friend class forward_tlist_iterator<T>;
 
-        using allocator_type = allocator;
     private:
         /**
          * Constructor
