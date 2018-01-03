@@ -7,16 +7,17 @@
 namespace tlib {
     template <typename T>
     class forward_tlist_iterator : public std::iterator<std::forward_iterator_tag, T> {
-    friend class forward_tlist<T>;
+        friend class forward_tlist<T, std::allocator<T>>;
 
     public:
+        using node_pointer = tlib::forward_tlist_node<T> *;
         T& operator*();
         const forward_tlist_iterator<T>& operator++();
         bool operator!=(const forward_tlist_iterator<T>& other) const;
 
     private:
         forward_tlist_node<T> *pointee;
-        explicit forward_tlist_iterator(forward_tlist_node<T> *pointee): pointee(pointee) {}
+        explicit forward_tlist_iterator(node_pointer pointee): pointee(pointee) {}
 
     }; //class forward_tlist_iterator
 } //namespace tlib

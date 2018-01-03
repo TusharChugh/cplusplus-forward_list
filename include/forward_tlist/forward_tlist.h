@@ -2,11 +2,14 @@
 #define FORWARD_LIST_FORWARD_TLIST_H
 
 #include "forward_tlist_node.h"
+#include "forward_tlist_iterator.h"
 #include <memory>
 
 namespace tlib{
     template <typename T, typename Alloc>
     class forward_tlist{
+
+    public:
         using allocator_type = Alloc;
         using value_type = typename Alloc::value_type;
         using pointer = typename Alloc::pointer;
@@ -14,9 +17,9 @@ namespace tlib{
         using const_reference = typename Alloc::const_reference;
         using size_type = typename Alloc::size_type;
         using forward_tlist_node = tlib::forward_tlist_node<value_type>;
+        using node_pointer = tlib::forward_tlist_node<value_type> *;
         using iterator = tlib::forward_tlist_iterator<value_type>;
 
-    public:
         explicit forward_tlist(const allocator_type & alloc = allocator_type()):
                 __allocator(alloc), __head(nullptr), __tail(nullptr), __size(0) {};
 
@@ -29,20 +32,22 @@ namespace tlib{
          * @param element the value of the element to prepend
          */
         void push_front(const_reference element) {
-            auto new_node = __allocator.allocate(1);
-            __allocator.construct(new_node, element);
-//            new_node->next = __head;
-//            __head = new_node;
+            auto new_element = __allocator.allocate(1);
+            __allocator.construct(new_element, element);
+            auto new_node = new forward_tlist_node(element, nullptr);
+            new_node->next = __head;
+            __head = new_node;
             __size++;
         }
-        iterator begin() { return forward_tlist_iterator<T>(__head); }
-        iterator end() { return forward_tlist_iterator<T>(nullptr); }
+
+        iterator begin() noexcept { return forward_tlist_iterator<value_type>(__head); }
+        iterator end() noexcept { return forward_tlist_iterator<value_type>(nullptr); }
 
     private:
         size_type __size;
         allocator_type __allocator;
-        pointer __head;
-        pointer __tail;
+        node_pointer __head;
+        node_pointer __tail;
     }; //class forward_tlist
 } //namespace tlib
 
