@@ -9,16 +9,20 @@ namespace tlib {
     class forward_tlist_iterator : public std::iterator<std::forward_iterator_tag, T, difference_type, pointer, reference> {
         friend class forward_tlist<T, std::allocator<T>>;
 
-        using forward_tlist_iterator_base = std::iterator<std::forward_iterator_tag, T, difference_type, pointer, reference>;
-
     public:
-        using node_pointer = forward_tlist_iterator_base *;
-        T& operator*();
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = T;
+        using forward_tlist_iterator_base = typename std::iterator<std::forward_iterator_tag, T, difference_type, pointer, reference>;
+        using node_pointer = tlib::forward_tlist_node<T> *;
+
+        reference operator*() {
+            return pointee->element;
+        }
         const forward_tlist_iterator_base& operator++();
         bool operator!=(const forward_tlist_iterator_base& other) const;
 
     private:
-        forward_tlist_iterator_base *pointee;
+        forward_tlist_node<T> *pointee;
         explicit forward_tlist_iterator(node_pointer pointee): pointee(pointee) {}
 
     }; //class forward_tlist_iterator

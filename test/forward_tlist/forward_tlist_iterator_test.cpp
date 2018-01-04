@@ -7,5 +7,6 @@ TEST(ITERATOR, ITERATOR) {
     int_list.push_front(2);
     auto iterator_begin = int_list.begin();
     auto iterator_end = int_list.end();
-    ASSERT_TRUE(1);
+    ASSERT_EQ(*iterator_begin, 2);
+    ASSERT_EQ(*iterator_end, NULL);
 }

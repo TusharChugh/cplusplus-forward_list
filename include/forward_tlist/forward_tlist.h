@@ -20,6 +20,7 @@ namespace tlib{
         using forward_tlist_node = tlib::forward_tlist_node<value_type>;
         using node_pointer = tlib::forward_tlist_node<value_type> *;
         using iterator = tlib::forward_tlist_iterator<value_type, difference_type, pointer, reference>;
+        using const_iterator = tlib::forward_tlist_iterator<value_type, difference_type, const pointer, reference>;
 
         explicit forward_tlist(const allocator_type & alloc = allocator_type()):
                 __allocator(alloc), __head(nullptr), __tail(nullptr), __size(0) {};
