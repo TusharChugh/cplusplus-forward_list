@@ -10,6 +10,7 @@ Todo's:
 4. add sort
 5. add function  make iterator
 6. add function to create a node using the allocator
+7. add assert after insertion
 
 
 ## Resources

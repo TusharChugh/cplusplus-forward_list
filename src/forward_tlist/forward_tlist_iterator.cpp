@@ -2,19 +2,21 @@
 #include <assert.h>
 
 
-template <typename T>
-T& tlib::forward_tlist_iterator<T>::operator*() {
+template <typename T, typename difference_type, typename pointer, typename reference>
+T& tlib::forward_tlist_iterator::operator*() {
     return pointee->element;
 }
 
-template <typename T>
-const tlib::forward_tlist_iterator<T>& tlib::forward_tlist_iterator<T>::operator++() {
+template <typename T, typename difference_type, typename pointer, typename reference>
+const forward_tlist_iterator_base& const tlib::forward_tlist_iterator::operator++() {
     assert(pointee != nullptr);
     pointee = pointee->next;
     return *this;
 }
 
-template <typename T>
-bool tlib::forward_tlist_iterator<T>::operator!=(const tlib::forward_tlist_iterator<T>& other) const {
+
+
+template <typename T, typename difference_type, typename pointer, typename reference>
+bool tlib::forward_tlist_iterator::operator!=(const forward_tlist_iterator_base &other) const {
     return this->pointee != other.pointee;
 }
