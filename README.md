@@ -5,13 +5,8 @@ Demo implementation of c++ forward list
 
 Todo's:
 1. Add functionality to push back
-2. add const iterator
 3. add find 
 4. add sort
-5. add function  make iterator
-6. add function to create a node using the allocator
-7. add assert after insertion
-8. use of smart pointers
 
 ## Resources
 1. Custom Iterators: https://web.stanford.edu/class/cs107l/handouts/04-Custom-Iterators.pdf  
