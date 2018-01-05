@@ -10,3 +10,13 @@ TEST(ITERATOR, ITERATOR) {
     ASSERT_EQ(*iterator_begin, 2);
     ASSERT_EQ(*iterator_end, NULL);
 }
+
+TEST(CONST_ITERATOR, CONST_ITERATOR) {
+    tlib::forward_tlist<int> int_list;
+    int_list.push_front(1);
+    int_list.push_front(2);
+    auto iterator_begin = int_list.begin();
+    auto iterator_end = int_list.end();
+    ASSERT_EQ(*iterator_begin, 2);
+    ASSERT_EQ(*iterator_end, NULL);
+}

@@ -22,34 +22,44 @@ namespace tlib{
         using iterator = tlib::forward_tlist_iterator<value_type, difference_type, pointer, reference>;
         using const_iterator = tlib::forward_tlist_iterator<value_type, difference_type, const pointer, reference>;
 
-        explicit forward_tlist(const allocator_type & alloc = allocator_type()):
-                __allocator(alloc), __head(nullptr), __tail(nullptr), __size(0) {};
+        explicit forward_tlist(const allocator_type & alloc = allocator_type());
 
         ~forward_tlist() { delete __head; }
         bool empty() { return __head == nullptr; }
         size_type size() const;
+
         /**
          * Prepends the given element to the beginning of the container
          * No iterators are invalidated
          * @param element the value of the element to prepend
          */
-        void push_front(const_reference element) {
-            auto new_element = __allocator.allocate(1);
-            __allocator.construct(new_element, element);
-            auto new_node = new forward_tlist_node(element, nullptr);
-            new_node->next = __head;
-            __head = new_node;
-            __size++;
+        void push_front(const_reference element);
+
+        iterator make_iterator(node_pointer &node) {
+            return iterator(node);
         }
 
-        iterator begin() noexcept { return iterator(__head); }
-        iterator end() noexcept { return iterator(nullptr); }
+        const_iterator make_iterator(const node_pointer &node) {
+            return const_iterator(node);
+        }
+
+        iterator begin() noexcept { return make_iterator(__head); }
+        iterator end() noexcept { return make_iterator(__tail); }
+
+
+
+        const_iterator cbegin() const noexcept { return make_iterator(__head);  }
+        const_iterator cend() const noexcept { return make_iterator(__tail); }
 
     private:
         size_type __size;
         allocator_type __allocator;
         node_pointer __head;
         node_pointer __tail;
+
+        void init();
+
+        decltype(auto) create_node(const_reference element);
     }; //class forward_tlist
 } //namespace tlib
 
