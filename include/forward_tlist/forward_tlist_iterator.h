@@ -12,14 +12,23 @@ namespace tlib {
     public:
         using iterator_category = std::forward_iterator_tag;
         using value_type = T;
-        using forward_tlist_iterator_base = typename std::iterator<std::forward_iterator_tag, T, difference_type, pointer, reference>;
+        using forward_tlist_iterator_type = forward_tlist_iterator<value_type, difference_type, pointer, reference>;
         using node_pointer = tlib::forward_tlist_node<T> *;
 
         reference operator*() {
             return pointee->element;
         }
-        const forward_tlist_iterator_base& operator++();
-        bool operator!=(const forward_tlist_iterator_base& other) const;
+
+        const forward_tlist_iterator_type& operator++() {
+            pointee = pointee->next;
+            return *this;
+        }
+
+        bool operator!=(const forward_tlist_iterator_type& other) const {
+            return pointee != other.pointee;
+        };
+
+        forward_tlist_iterator() { }
 
     private:
         forward_tlist_node<T> *pointee;
