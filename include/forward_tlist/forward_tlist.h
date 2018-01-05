@@ -22,7 +22,8 @@ namespace tlib{
         using iterator = tlib::forward_tlist_iterator<value_type, difference_type, pointer, reference>;
         using const_iterator = tlib::forward_tlist_iterator<value_type, difference_type, const pointer, reference>;
 
-        explicit forward_tlist(const allocator_type & alloc = allocator_type());
+        //explicit forward_tlist(const allocator_type & alloc = allocator_type());
+        explicit forward_tlist(const allocator_type & alloc = allocator_type()): __allocator(alloc) { init(); };
 
         ~forward_tlist() { delete __head; }
         bool empty() { return __head == nullptr; }
@@ -33,7 +34,12 @@ namespace tlib{
          * No iterators are invalidated
          * @param element the value of the element to prepend
          */
-        void push_front(const_reference element);
+        void push_front(const_reference element) {
+            auto new_node = create_node(element);
+            new_node->next = __head;
+            __head = new_node;
+            __size++;
+        }
 
         iterator make_iterator(node_pointer &node) {
             return iterator(node);
@@ -57,9 +63,18 @@ namespace tlib{
         node_pointer __head;
         node_pointer __tail;
 
-        void init();
+        void init() {
+            __head = create_node(NULL);
+            __tail = __head;
+            __size = 0;
+        }
 
-        decltype(auto) create_node(const_reference element);
+        decltype(auto) create_node(const_reference element) {
+            auto new_element = __allocator.allocate(1);
+            __allocator.construct(new_element, element);
+            auto new_node = new forward_tlist_node(element, nullptr);
+            return new_node;
+        }
     }; //class forward_tlist
 } //namespace tlib
 
