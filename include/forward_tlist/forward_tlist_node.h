@@ -14,6 +14,7 @@ namespace tlib {
         using allocator_type = Alloc;
         using value_type = typename Alloc::value_type;
         using pointer = typename Alloc::pointer;
+        using const_pointer = typename Alloc::const_pointer;
         using reference = typename Alloc::reference;
         using const_reference = typename Alloc::const_reference;
         using size_type = typename Alloc::size_type;
@@ -22,6 +23,7 @@ namespace tlib {
         //Giving access to private members to forward_tlist<T> and forward_tlist_iterator<T>
         friend class forward_tlist<T, std::allocator<T>>;
         friend class forward_tlist_iterator<T, difference_type, pointer, reference>;
+        friend class forward_tlist_iterator<T, difference_type, const_pointer , reference>;
 
     private:
         /**

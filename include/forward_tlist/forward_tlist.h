@@ -13,6 +13,7 @@ namespace tlib{
         using allocator_type = Alloc;
         using value_type = typename Alloc::value_type;
         using pointer = typename Alloc::pointer;
+        using const_pointer = typename Alloc::const_pointer;
         using reference = typename Alloc::reference;
         using const_reference = typename Alloc::const_reference;
         using size_type = typename Alloc::size_type;
@@ -20,7 +21,7 @@ namespace tlib{
         using forward_tlist_node = tlib::forward_tlist_node<value_type>;
         using node_pointer = tlib::forward_tlist_node<value_type> *;
         using iterator = tlib::forward_tlist_iterator<value_type, difference_type, pointer, reference>;
-        using const_iterator = tlib::forward_tlist_iterator<value_type, difference_type, const pointer, reference>;
+        using const_iterator = tlib::forward_tlist_iterator<value_type, difference_type, const_pointer, reference>;
 
         //explicit forward_tlist(const allocator_type & alloc = allocator_type());
         explicit forward_tlist(const allocator_type & alloc = allocator_type()): __allocator(alloc) { init(); };
@@ -45,7 +46,7 @@ namespace tlib{
             return iterator(node);
         }
 
-        const_iterator make_iterator(const node_pointer &node) {
+        const_iterator make_iterator(const node_pointer &node) const {
             return const_iterator(node);
         }
 
@@ -64,7 +65,7 @@ namespace tlib{
         node_pointer __tail;
 
         void init() {
-            __head = create_node(NULL);
+            __head = create_node(value_type{});
             __tail = __head;
             __size = 0;
         }

@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <forward_list>
 #include "forward_tlist/forward_tlist.h"
 
 TEST(INTTEST, INTTEST) {
@@ -15,8 +16,15 @@ TEST(INTTEST1, INTTEST1) {
 }
 
 TEST(STRINGTEST, STRINGTEST) {
-    tlib::forward_tlist<std::string> string_list;
-    string_list.push_front("Hello");
-    string_list.push_front("World");
+    try {
+        std::forward_list<std::string> string_list;
+        string_list.push_front("Hello");
+        string_list.push_front("World");
+        tlib::forward_tlist<std::string> string_tlist;
+    }
+    catch (std::exception& e) {
+        std::cout<<"Error is "<<e.what()<<std::endl;
+    }
+
     ASSERT_TRUE(1);
 }

@@ -48,3 +48,24 @@ TEST(AUTO_ITERATOR, AUTO_ITERATOR_AU_Test) {
        std::cout<<element<<" ";
    }std::cout<<std::endl;
 }
+
+TEST(AUTO_ITERATOR, AUTO_ITERATOR_AUTO_ITERATOR_CONST__Test) {
+    tlib::forward_tlist<int> int_tlist;
+    int_tlist.push_front(1);
+    int_tlist.push_front(2);
+
+    for(tlib::forward_tlist<int>::const_iterator iterator = int_tlist.cbegin(); iterator != int_tlist.cend(); ++iterator) {
+        std::cout<<*iterator<<" ";
+    }std::cout<<std::endl;
+}
+
+
+TEST(AUTO_ITERATOR1, AUTO_ITERATOR_AUTO_ITERATOR_CONST__Test1) {
+    std::forward_list<int> int_tlist;
+    int_tlist.push_front(1);
+    int_tlist.push_front(2);
+
+    for(std::forward_list<int>::const_iterator iterator = int_tlist.cbegin(); iterator != int_tlist.cend(); ++iterator) {
+        std::cout<<*iterator<<" ";
+    }std::cout<<std::endl;
+}
