@@ -38,6 +38,10 @@ namespace tlib {
             return ++*this, _temp;
         }
 
+        bool operator==(const iterator_base& other) const {
+            return _pointee == other._pointee;
+        };
+
         bool operator!=(const iterator_base& other) const {
             return _pointee != other._pointee;
         };
