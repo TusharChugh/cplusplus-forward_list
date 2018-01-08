@@ -33,6 +33,11 @@ namespace tlib {
             return *this;
         }
 
+        forward_tlist_iterator operator++(int) {
+            forward_tlist_iterator _temp = *this;
+            return ++*this, _temp;
+        }
+
         bool operator!=(const iterator_base& other) const {
             return _pointee != other._pointee;
         };
