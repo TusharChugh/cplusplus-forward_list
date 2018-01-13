@@ -5,24 +5,26 @@
 
 namespace tlib {
     //forward declare forward_tlist and iterator
-    template<typename T, typename Alloc = std::allocator<T>> class forward_tlist;
-    template <typename forward_tlist> class forward_tlist_iterator;
+    template<typename _T, typename _Alloc = std::allocator<_T>> class forward_tlist;
+    template <typename _forward_tlist, typename _pointer, typename _reference> class forward_tlist_iterator;
 
     template<typename T>
     class forward_tlist_node {
-        using Alloc = std::allocator<T>;
-        using allocator_type = Alloc;
-        using value_type = typename Alloc::value_type;
-        using pointer = typename Alloc::pointer;
-        using const_pointer = typename Alloc::const_pointer;
-        using reference = typename Alloc::reference;
-        using const_reference = typename Alloc::const_reference;
-        using size_type = typename Alloc::size_type;
-        using difference_type = typename Alloc::difference_type;
+        using _forward_tlist_type = forward_tlist<T, std::allocator<T>>;
+        using _Alloc = typename _forward_tlist_type::allocator_type ;
+        using value_type = typename _Alloc::value_type;
+        using pointer = typename _Alloc::pointer;
+        using const_pointer = typename _Alloc::const_pointer;
+        using reference = typename _Alloc::reference;
+        using const_reference = typename _Alloc::const_reference;
+        using size_type = typename _Alloc::size_type;
+        using difference_type = typename _Alloc::difference_type;
+
 
         //Giving access to private members to forward_tlist<T> and forward_tlist_iterator<T>
         friend class forward_tlist<T, std::allocator<T>>;
-        friend class forward_tlist_iterator<forward_tlist<T, std::allocator<T>>>;
+        friend class forward_tlist_iterator<_forward_tlist_type, typename _forward_tlist_type::pointer, typename _forward_tlist_type::reference>;
+        friend class forward_tlist_iterator<_forward_tlist_type, typename _forward_tlist_type::const_pointer, typename _forward_tlist_type::const_reference>;
 
     private:
         /**

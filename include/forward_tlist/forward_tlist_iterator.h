@@ -5,27 +5,27 @@
 #include <iterator>
 
 namespace tlib {
-    template <typename _forward_tlist>
+    template <typename _forward_tlist_t, typename _pointer, typename _reference>
     class forward_tlist_iterator : public std::iterator<
             std::forward_iterator_tag,
-            typename _forward_tlist::value_type,
-            typename _forward_tlist::difference_type,
-            typename _forward_tlist::pointer,
-            typename _forward_tlist::reference> {
+            typename _forward_tlist_t::value_type,
+            typename _forward_tlist_t::difference_type,
+            _pointer,
+            _reference> {
 
     public:
-        using value_type = typename _forward_tlist::value_type;
-        using difference_type = typename _forward_tlist::difference_type;
-        using reference = typename _forward_tlist::reference;
-        using const_reference = typename _forward_tlist::const_reference ;
-        using pointer = typename _forward_tlist::pointer;
-        using const_pointer = typename _forward_tlist::const_pointer;
+        using value_type = typename _forward_tlist_t::value_type;
+        using difference_type = typename _forward_tlist_t::difference_type;
+        using reference = typename _forward_tlist_t::reference;
+        using const_reference = typename _forward_tlist_t::const_reference ;
+        using pointer = typename _forward_tlist_t::pointer;
+        using const_pointer = typename _forward_tlist_t::const_pointer;
         using iterator_category = std::forward_iterator_tag;
 
         using link_type = tlib::forward_tlist_node<value_type> *;
-        using iterator_base = forward_tlist_iterator<_forward_tlist>;
+        using iterator_base = forward_tlist_iterator<_forward_tlist_t, _pointer, _reference>;
 
-        friend class forward_tlist<value_type, typename _forward_tlist::allocator_type>;
+        friend class forward_tlist<value_type, typename _forward_tlist_t::allocator_type>;
 
         reference operator*() {
             return (*_pointee).element;

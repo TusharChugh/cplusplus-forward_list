@@ -19,8 +19,8 @@ namespace tlib{
         using pointer = typename _Alloc::pointer;
         using const_pointer = typename _Alloc::const_pointer;
         using list_type = forward_tlist<_T, _Alloc>;
-        using iterator = tlib::forward_tlist_iterator<list_type>;
-        using const_iterator = tlib::forward_tlist_iterator<list_type>;
+        using iterator = tlib::forward_tlist_iterator<list_type, pointer, reference >;
+        using const_iterator = tlib::forward_tlist_iterator<list_type, const_pointer, const_reference>;
 
         using _forward_tlist_node = tlib::forward_tlist_node<value_type>;
         using _node_pointer = tlib::forward_tlist_node<value_type> *;
