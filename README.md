@@ -4,9 +4,9 @@ Demo implementation of c++ forward list
 1. Two ways of implementing it: Inner class/friend class. I used friend class because it is easier to read the code separated in different files.  
 
 Todo's:
-1. Add functionality to push back
-3. add find 
-4. add sort
+1. add find 
+2. add sort
+3. Copy constructor, swap, destructor
 
 ## Resources
 1. Custom Iterators: https://web.stanford.edu/class/cs107l/handouts/04-Custom-Iterators.pdf  
