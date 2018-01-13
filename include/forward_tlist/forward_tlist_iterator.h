@@ -5,24 +5,27 @@
 #include <iterator>
 
 namespace tlib {
-    template <typename _T, typename _difference_type, typename _pointer, typename _reference>
-    class forward_tlist_iterator : public std::iterator<std::forward_iterator_tag, _T, _difference_type, _pointer, _reference> {
-        friend class forward_tlist<_T, std::allocator<_T>>;
-        using iterator_base = forward_tlist_iterator<_T, _difference_type, _pointer, _reference>;
+    template <typename _forward_tlist>
+    class forward_tlist_iterator : public std::iterator<
+            std::forward_iterator_tag,
+            typename _forward_tlist::value_type,
+            typename _forward_tlist::difference_type,
+            typename _forward_tlist::pointer,
+            typename _forward_tlist::reference> {
 
     public:
-        using value_type = typename iterator_base::value_type;
-        using pointer = typename iterator_base::pointer;
-        using difference_type = typename iterator_base::difference_type;
-        using reference = typename iterator_base::reference;
-
-        using const_pointer = const value_type*;
-        using const_reference = const value_type&;
+        using value_type = typename _forward_tlist::value_type;
+        using difference_type = typename _forward_tlist::difference_type;
+        using reference = typename _forward_tlist::reference;
+        using const_reference = typename _forward_tlist::const_reference ;
+        using pointer = typename _forward_tlist::pointer;
+        using const_pointer = typename _forward_tlist::const_pointer;
         using iterator_category = std::forward_iterator_tag;
 
-        using mutable_iterator = forward_tlist_iterator<value_type, difference_type, value_type*, reference&>;
         using link_type = tlib::forward_tlist_node<value_type> *;
+        using iterator_base = forward_tlist_iterator<_forward_tlist>;
 
+        friend class forward_tlist<value_type, typename _forward_tlist::allocator_type>;
 
         reference operator*() {
             return (*_pointee).element;
